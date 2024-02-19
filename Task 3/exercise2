@@ -1,0 +1,7 @@
+function outputWord(inoutWord) {
+    if (inputWord.length > 10) {
+        return inputWord.stringWord(0, 6);
+    } else {
+        return inputWord.exchangeString(12, 'o');
+    }
+}
