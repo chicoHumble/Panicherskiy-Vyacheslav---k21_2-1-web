@@ -1,0 +1,24 @@
+//Разбить последовательность чисел от 1 до N^2 на N подпоследовательностей так, чтобы все они состояли из N чисел и имели равные суммы. Если решений несколько, то вывести любое из них.
+
+function splitSequence(N) {
+    const totalNumbers = N * N;
+    const targetSum = (totalNumbers * (totalNumbers + 1)) / (2 * N); // Рассчитываем целевую сумму подпоследовательности
+
+    const result = [];
+
+    let currentSequence = [];
+    let currentSum = 0;
+
+    for (let i = 1; i <= totalNumbers; i++) {
+        currentSequence.push(i);
+        currentSum += i;
+
+        if (currentSequence.length === N || currentSum === targetSum) {
+            result.push(currentSequence);
+            currentSequence = [];
+            currentSum = 0;
+        }
+    }
+
+    return result;
+}
