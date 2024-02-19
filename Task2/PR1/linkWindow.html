@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Главная страница</title>
+  <script>
+    var win;
+
+    function openWindow() {
+      win = window.open('', 'Дочернее окно', 'width=400,height=300');
+      win.document.write('<p align="center"><input type="button" value="Закрыть" name="B1" onclick="opener.exit(opener.win);"></p>');
+    }
+
+    function exit(param) {
+      param.alert('Внимание! Окно будет закрыто!');
+      param.close();
+    }
+  </script>
+</head>
+<body>
+  <h1>Главная страница</h1>
+  <p><input type="button" value="Открыть дочернюю форму" name="B1" onclick="openWindow();"></p>
+  <p><input type="button" value="Закрыть дочернюю форму" name="B2" onclick="exit(win);"></p>
+</body>
+</html>
