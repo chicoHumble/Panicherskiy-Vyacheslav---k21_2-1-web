@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Калькулятор</title>
+    <style>
+        table {
+            width: 50%;
+            margin: auto;
+            text-align: center;
+        }
+
+        input {
+            width: 70px;
+        }
+    </style>
+</head>
+<body>
+
+<form name="form1">
+    <table border="1">
+        <tr>
+            <td colspan="4"><input type="text" name="T1" value="0"></td>
+        </tr>
+        <tr>
+            <td><input type="button" value="1" onclick="addToInput('1')"></td>
+            <td><input type="button" value="2" onclick="addToInput('2')"></td>
+            <td><input type="button" value="3" onclick="addToInput('3')"></td>
+            <td><input type="button" value="СЕ" onclick="steret()"></td>
+        </tr>
+        <tr>
+            <td><input type="button" value="4" onclick="addToInput('4')"></td>
+            <td><input type="button" value="5" onclick="addToInput('5')"></td>
+            <td><input type="button" value="6" onclick="addToInput('6')"></td>
+            <td><input type="button" value="/" onclick="delen()"></td>
+        </tr>
+        <tr>
+            <td><input type="button" value="7" onclick="addToInput('7')"></td>
+            <td><input type="button" value="8" onclick="addToInput('8')"></td>
+            <td><input type="button" value="9" onclick="addToInput('9')"></td>
+            <td><input type="button" value="-" onclick="minus()"></td>
+        </tr>
+        <tr>
+            <td><input type="button" value="0" onclick="addToInput('0')"></td>
+            <td><input type="button" value="." onclick="addToInput('.')"></td>
+            <td><input type="button" value="=" onclick="calculate()"></td>
+            <td><input type="button" value="+" onclick="plus()"></td>
+        </tr>
+        <tr>
+            <td><input type="button" value="X^Y" onclick="stepen()"></td>
+            <td><input type="button" value="ABS" onclick="modul()"></td>
+            <td><input type="button" value="SQRT" onclick="koren()"></td>
+            <td><input type="button" value="Точность" onclick="tochnost()"></td>
+        </tr>
+        <tr>
+            <td><input type="button" value="CEIL" onclick="okruglvverh()"></td>
+            <td><input type="button" value="FLOOR" onclick="okruglvniz()"></td>
+            <td><input type="button" value="ROUND" onclick="okrugl()"></td>
+            <td><input type="button" value="EXP" onclick="exponent()"></td>
+        </tr>
+        <tr>
+            <td><input type="button" value="LN" onclick="logarifm()"></td>
+            <td><input type="button" value="SIN" onclick="sinus()"></td>
+            <td><input type="button" value="COS" onclick="cosinus()"></td>
+            <td><input type="button" value="TAN" onclick="tangens()"></td>
+        </tr>
+        <tr>
+            <td colspan="2"><input type="button" value="COT" onclick="cotangens()"></td>
+            <td colspan="2"><input type="button" value="CLEAR" onclick="steret()"></td>
+        </tr>
+        <tr>
+            <td colspan="4"><input type="text" name="T2" value="0"></td>
+        </tr>
+        <tr>
+            <td colspan="4"><input type="text" name="T3" value="0"></td>
+        </tr>
+    </table>
+</form>
+
+<script type="text/javascript">
+    function addToInput(value) {
+        document.form1.T1.value += value;
+    }
+
+    function calculate() {
+        try {
+            document.form1.T3.value = eval(document.form1.T1.value);
+        } catch (error) {
+            alert("Ошибка в выражении!");
+        }
+    }
+
+    function plus() {
+        a = +window.document.form1.T1.value;
+        b = +window.document.form1.T2.value;
+        window.document.form1.T3.value = a + b;
+    }
+
+    function minus() {
+        a = +window.document.form1.T1.value;
+        b = +window.document.form1.T2.value;
+        window.document.form1.T3.value = a - b;
+    }
+
+    function proizv() {
+        a = +window.document.form1.T1.value;
+        b = +window.document.form1.T2.value;
+        window.document.form1.T3.value = a * b;
+    }
+
+    function delen() {
+        a = +window.document.form1.T1.value;
+        b = +window.document.form1.T2.value;
+        if (b != 0)
+            window.document.form1.T3.value = a / b;
+        else {
+            alert("Делить на ноль нельзя!");
+            window.document.form1.T2.focus();
+            window.document.form1.T2.select();
+        }
+    }
+
+    function stepen() {
+        a = +window.document.form1.T1.value;
+        b = +window.document.form1.T2.value;
+        window.document.form1.T3.value = Math.pow(a, b);
+    }
+
+    function modul() {
+        a = +window.document.form1.T1.value;
+        window.document.form1.T3.value = Math.abs(a);
+    }
+
+    function koren() {
+        a = +window.document.form1.T1.value;
+        if (a >= 0)
+            window.document.form1.T3.value = Math.sqrt(a);
+        else {
+            alert("Нельзя извлечь корень из отрицательного числа!");
+            window.document.form1.T1.focus();
+            window.document.form1.T1.select();
+        }
+    }
+
+    function exponent() {
+        a = +window.document.form1.T1.value;
+        window.document.form1.T3.value = Math.exp(a);
+    }
+
+    function logarifm() {
+        a = +window.document.form1.T1.value;
+        if (a >= 1)
+            window.document.form1.T3.value = Math.sqrt(a);
+        else {
+            alert("Нельзя расчитать логарифм для значения меньше 1!");
+            window.document.form1.T1.focus();
+            window.document.form1.T1.select();
+        }
+    }
+
+    function sinus() {
+        a = +window.document.form1.T1.value;
+        window.document.form1.T3.value = Math.sin(a);
+    }
+
+    function cosinus() {
+        a = +window.document.form1.T1.value;
+        window.document.form1.T3.value = Math.cos(a);
+    }
+
+    function tangens() {
+        a = +window.document.form1.T1.value;
+        window.document.form1.T3.value = Math.tan(a);
+    }
+
+    function cotangens() {
+        a = +window.document.form1.T1.value;
+        if (a > 0)
+            window.document.form1.T3.value = 1 / Math.tan(a);
+        else {
+            alert("Нельзя рассчитать котангенс из нуля!");
+            window.document.form1.T1.focus();
+            window.document.form1.T1.select();
+        }
+    }
+
+    function tochnost() {
+        a = +window.prompt("Введите точность", "2");
+        b = +window.document.form1.T3.value;
+        window.document.form1.T3.value = b.toFixed(a);
+    }
+
+    function okruglvverh() {
+        a = +window.document.form1.T3.value;
+        window.document.form1.T3.value = Math.ceil(a);
+    }
+
+    function okruglvniz() {
+        a = +window.document.form1.T3.value;
+        window.document.form1.T3.value = Math.floor(a);
+    }
+
+    function okrugl() {
+        a = +window.document.form1.T3.value;
+        window.document.form1.T3.value = Math.round(a);
+    }
+
+    function steret() {
+        window.document.form1.T1.value = 0;
+        window.document.form1.T2.value = 0;
+        window.document.form1.T3.value = 0;
+        window.document.form1.T1.focus();
+        window.document.form1.T1.select();
+    }
+</script>
+
+</body>
+</html>

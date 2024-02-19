@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Password Page</title>
+</head>
+<body>
+    <script type="text/javascript">
+        function checkPassword() {
+            while (prompt('Введите пароль для доступа к странице:') !== '111111') {
+                if (!confirm('Пароль не верный. Повторить ввод?')) {
+                    window.close();
+                    break;
+                }
+            }
+        }
+
+        checkPassword();
+    </script>
+</body>
+</html>
