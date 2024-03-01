@@ -1,0 +1,10 @@
+var filePath = prompt("Введите путь к файлу на компьютере:");
+
+// разделение пути на имена папок
+var foldersArray = filePath.split(/[\\\/]/);
+
+
+console.log("Имена папок для доступа к файлу:");
+for (var i = 0; i < foldersArray.length - 1; i++) {
+    console.log(foldersArray[i]);
+}
