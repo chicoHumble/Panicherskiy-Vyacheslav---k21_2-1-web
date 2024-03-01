@@ -1,4 +1,4 @@
-var userInput = prompt("Enter your first name and last name (two words, separated by a space):");
+var userInput = prompt("Enter your first name and last name");
 
 var employeeList = [
     "Kuzmin Ivan",
