@@ -1,0 +1,24 @@
+//Задание 3. Создать класс объектов (Tour) для работы туристической фирмы с
+//методом подсчета стоимости поездки из расчета: количества человек * количество
+//дней * тариф страны. Создать экземпляр объекта turkeyTour со значениями свойств.
+//Вывести все свойства объекта на экран. Метод объекта расчет создавать на основе функции.
+
+class Tour {
+    constructor(numPeople, numDays, countryRate) {
+        this.numPeople = numPeople;
+        this.numDays = numDays;
+        this.countryRate = countryRate;
+    }
+
+    calculate() {
+        return this.numPeople * this.numDays * this.countryRate;
+    }
+}
+
+var turkeyTrip = new Tour(5, 7, 10);
+
+console.log("Number of people: " + turkeyTrip.numPeople);
+console.log("Number of days: " + turkeyTrip.numDays);
+console.log("Country rate: " + turkeyTrip.countryRate);
+
+console.log("Trip cost: " + turkeyTrip.calculate());
