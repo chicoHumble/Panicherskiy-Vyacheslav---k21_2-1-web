@@ -1,0 +1,7 @@
+var text = "Домик, столик, ключик, икра, абрикос.";
+
+var regular = /\b(\w+?)ик\b/g;
+
+текст = text.replace(regular, '$1');
+
+console.log(text);
