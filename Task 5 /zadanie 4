@@ -1,0 +1,15 @@
+var userInput = prompt("Введите число (целое или десятичное):");
+
+// проверка, является ли строка десятичной дробью или целым числом
+var numberPattern = /^(\d+)([.,](\d+))?$/;
+
+if (numberPattern.test(userInput)) {
+    var match = userInput.match(numberPattern);
+    var integerPart = match[1];
+    var decimalPart = match[3] || "0";
+    
+    console.log("Целая часть: " + integerPart);
+    console.log("Дробная часть: " + decimalPart);
+} else {
+    console.log("Некорректный ввод. Введите десятичную дробь или целое число.");
+}
