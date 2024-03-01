@@ -1,0 +1,6 @@
+var inputString = prompt("Введите строку с числами:");
+
+var numbersArray = inputString.match(/\d+/g) || [];
+
+console.log("Извлеченные числа из строки:");
+console.log(numbersArray);
