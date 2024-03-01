@@ -1,0 +1,17 @@
+String.prototype.uroven = "1";
+
+function printZagolovok() {
+    var zagolovokLevel = prompt("Введите уровень заголовка (1-6):");
+    if (zagolovokLevel >= 1 && zagolovokLevel <= 6) {
+        document.write("<h" + zagolovokLevel + ">Ура!</h" + zagolovokLevel + ">");
+    } else {
+        alert("Некорректный уровень заголовка. Используется уровень по умолчанию (1).");
+        document.write("<h1>Ура!</h1>");
+    }
+}
+
+var s = new String();
+s.printMe = printZagolovok;
+
+
+s.printMe();
