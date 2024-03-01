@@ -1,0 +1,13 @@
+var userInput = prompt("Enter your first name and last name (two words, separated by a space):");
+
+var nameRegex = /^(\S+)\s+(\S+)$/; //регулярное выражение которое проверяет что ввод состоит из двух слов, разделенных пробелом
+
+if (nameRegex.test(userInput)) {
+    var match = userInput.match(nameRegex);
+    var фамилия = match[1];
+    var имя = match[2];
+    console.log("Фамилия: " + фамилия);
+    console.log("Имя: " + имя);
+} else {
+    console.log("Неверный формат ввода. Введите два слова, разделенные пробелом.");
+}
