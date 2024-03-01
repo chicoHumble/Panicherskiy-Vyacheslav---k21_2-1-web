@@ -1,0 +1,11 @@
+var text = "блалаалл экстраординаторное балалбундрук";
+
+var longWord = text.match(/\b\w{15,}\b/g);
+
+if (longWord) {
+    for (var i = 0; i < longWord.length; i++) {
+        text = text.replace(new RegExp(longWord[i], 'g'), 'абстр...ние');
+    }
+}
+
+console.log(text);
