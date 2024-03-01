@@ -1,0 +1,24 @@
+class MenuItem {
+    constructor(title, url) {
+        this.title = title;
+        this.url = url;
+    }
+
+    show() {
+        document.write('<li><a href="' + this.url + '">' + this.title + '</a></li>');
+    }
+}
+
+
+var menuItem1 = new MenuItem(prompt("Введите название первого пункта меню:"), prompt("Введите URL первого пункта меню:"));
+var menuItem2 = new MenuItem(prompt("Введите название второго пункта меню:"), prompt("Введите URL второго пункта меню:"));
+var menuItem3 = new MenuItem(prompt("Введите название третьего пункта меню:"), prompt("Введите URL третьего пункта меню:"));
+var menuItem4 = new MenuItem(prompt("Введите название четвертого пункта меню:"), prompt("Введите URL четвертого пункта меню:"));
+
+
+document.write("<ul>");
+menuItem1.show();
+menuItem2.show();
+menuItem3.show();
+menuItem4.show();
+document.write("</ul>");
