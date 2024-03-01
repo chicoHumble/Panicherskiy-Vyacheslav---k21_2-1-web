@@ -1,0 +1,16 @@
+var userInput = prompt("Enter your first name and last name (two words, separated by a space):");
+
+var employeeList = [
+    "Kuzmin Ivan",
+    "Petrov Petr",
+    "Fedorov Ivan"
+];
+
+for (var i = 0; i < employeeList.length; i++) {
+    if (employeeList[i] === userInput) {
+        employeeList[i] = "Ivanov Ivan";
+    }
+}
+
+console.log("Employee list after replacement:");
+console.log(employeeList);
