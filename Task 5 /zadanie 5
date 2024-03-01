@@ -1,0 +1,11 @@
+var phoneRegex = /^(8|\+7)[\s(]*\d{3}[\s)]?\d{3}[-]?\d{2}[-]?\d{2}$/;
+
+// пример использования:
+console.log(phoneRegex.test("89001234567")); // правда
+console.log(phoneRegex.test("+79001234567"));  // правда
+console.log(phoneRegex.test("8 900 123 45 67"));  // правда
+console.log(phoneRegex.test("+7 900 123 45 67"));  // правда
+console.log(phoneRegex.test("8 (900) 123-45-67"));  // правда
+console.log(phoneRegex.test("+7 (900) 123-45-67"));  // правда
+console.log(phoneRegex.test("8(900)123-45-67"));  // правда
+console.log(phoneRegex.test("+7(900)123-45-67"));  // правда
