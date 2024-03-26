@@ -1,0 +1,17 @@
+//Если переменная a больше нуля и меньше 5-ти, то выведите Верно, иначе
+//выведите Неверно. Проверьте работу скрипта при a, равном 5, 0, -3, 2.
+
+const a = [5, 0, -3, 2];
+
+function checkAndPrint(a) {
+    if (a > 0 && a < 5) {
+        console.log('Верно');
+    } else {
+        console.log('Неверно');
+    }
+}
+
+testValues.forEach(value => {
+    console.log(`При a = ${value}:`);
+    checkAndPrint(value);
+});
