@@ -1,0 +1,14 @@
+// Условие: Разбить последовательность чисел от 1 до N^2 на N подпоследовательностей так, чтобы все они состояли из N чисел и имели равные суммы. Если решений несколько, то вывести любое из них.
+
+const N = 3;
+
+const sequences = Array.from({ length: N }, () => []);
+
+for (let i = 1; i <= N * N; i++) {
+    const sequenceIndex = (i - 1) % N;
+    sequences[sequenceIndex].push(i);
+}
+
+sequences.forEach(sequence => {
+    console.log(sequence);
+});
