@@ -1,0 +1,13 @@
+// Условие: Дана строка. Если ее длина больше 10, то оставить в строке только первые 6 символов, иначе дополнить строку символами 'o' до длины 12.
+
+const inputString = "adjsfbhsd"; // Меняйте строку здесь для тестирования
+
+let resultString;
+
+if (inputString.length > 10) {
+    resultString = inputString.substring(0, 6);
+} else {
+    resultString = inputString.padEnd(12, 'o');
+}
+
+console.log(resultString);
