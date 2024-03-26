@@ -1,0 +1,24 @@
+// Условие: Написать скрипт для определения самого длинного общего слова двух заданных предложений.
+
+const sentence1 = "something";
+const sentence2 = "anythibngthere";
+
+function findLongestCommonWord(sentence1, sentence2) {
+    const words1 = sentence1.split(" ");
+    const words2 = sentence2.split(" ");
+
+    let longestCommonWord = "";
+
+    words1.forEach(word1 => {
+        words2.forEach(word2 => {
+            if (word1 === word2 && word1.length > longestCommonWord.length) {
+                longestCommonWord = word1;
+            }
+        });
+    });
+
+    return longestCommonWord;
+}
+
+const longestCommonWord = findLongestCommonWord(sentence1, sentence2);
+console.log("Самое длинное общее слово:", longestCommonWord);
