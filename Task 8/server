@@ -1,0 +1,61 @@
+const express = require('express');
+const bodyParser = require('body-parser');
+
+const artists = [
+  { id: 1, name: 'Metallica' },
+  { id: 2, name: 'Iron Maiden' },
+  { id: 3, name: 'Deep Purple' }
+];
+
+const app = express();
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+
+app.get('/', function (req, res) {
+  res.send('Hello API');
+});
+
+app.get('/artists', function (req, res) {
+  res.send(artists);
+});
+
+app.get('/artists/:id', function (req, res) {
+  const artist = artists.find(artist => artist.id === Number(req.params.id));
+
+  if (artist) {
+    res.send(artist);
+  } else {
+    res.sendStatus(404);
+  }
+});
+
+app.post('/artists', function (req, res) {
+  const artist = {
+    id: Date.now(),
+    name: req.body.name
+  };
+
+  artists.push(artist);
+  res.send(artist);
+});
+
+app.put('/artists/:id', function (req, res) {
+  const artist = artists.find(artist => artist.id === Number(req.params.id));
+
+  if (artist) {
+    artist.name = req.body.name;
+    res.sendStatus(200);
+  } else {
+    res.sendStatus(404);
+  }
+});
+
+app.delete('/artists/:id', function (req, res) {
+  artists = artists.filter(artist => artist.id !== Number(req.params.id));
+  res.sendStatus(200);
+});
+
+app.listen(3012, function () {
+  console.log('API app started');
+});
