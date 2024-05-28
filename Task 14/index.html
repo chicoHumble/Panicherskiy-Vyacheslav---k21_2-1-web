@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Hello React</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div id="app" class="container mt-5"></div>
+      
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script type="text/babel">
+        class Hello extends React.Component {
+            constructor(props) {
+                super(props);
+                this.state = {
+                    welcome: "Добро пожаловать на сайт!",
+                    input: ""
+                };
+            }
+
+            handleInputChange = (event) => {
+                this.setState({ input: event.target.value });
+            }
+
+            handleSubmit = (event) => {
+                event.preventDefault();
+                if (this.state.input.trim()) {
+                    this.setState({ welcome: this.state.input, input: "" });
+                } else {
+                    alert("Пожалуйста, введите допустимое сообщение.");
+                }
+            }
+
+            render() {
+                return (
+                    <div className="text-center">
+                        <h1>{this.state.welcome}</h1>
+                        <form onSubmit={this.handleSubmit} className="mt-4">
+                            <div className="form-group">
+                                <input 
+                                    type="text" 
+                                    className="form-control" 
+                                    value={this.state.input}
+                                    onChange={this.handleInputChange}
+                                    placeholder="Введите новое приветственное сообщение"
+                                />
+                            </div>
+                            <button type="submit" className="btn btn-primary mt-2">Обновить сообщение</button>
+                        </form>
+                    </div>
+                );
+            }
+        }
+
+        ReactDOM.createRoot(document.getElementById("app")).render(<Hello />);
+    </script>
+</body>
+</html>

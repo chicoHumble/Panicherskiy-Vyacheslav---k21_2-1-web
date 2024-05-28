@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Формы в React</title>
+    <style>
+        form {
+            max-width: 300px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        label {
+            font-weight: bold;
+        }
+        input {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+        }
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div id="app"></div>
+        
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+        
+    <script type="text/babel">
+    class UserForm extends React.Component {
+      constructor(props) {
+        super(props);
+        this.state = {
+          name: "",
+          age: 0,
+          email: "",
+          nameValid: false,
+          ageValid: false,
+          emailValid: false
+        };
+   
+        this.nameField = React.createRef();
+        this.ageField = React.createRef();
+        this.emailField = React.createRef();
+
+        this.handleSubmit = this.handleSubmit.bind(this);
+      }
+
+      validateAge(age){
+          return age >= 0;
+      }
+
+      validateName(name){
+          return name.length > 2;
+      }
+
+      validateEmail(email){
+          return /\S+@\S+\.\S+/.test(email);
+      }
+
+      handleSubmit(e) {
+          e.preventDefault();
+          const name = this.nameField.current.value;
+          const age = parseInt(this.ageField.current.value);
+          const email = this.emailField.current.value;
+          
+          const nameValid = this.validateName(name);
+          const ageValid = this.validateAge(age);
+          const emailValid = this.validateEmail(email);
+
+          this.setState({ name, age, email, nameValid, ageValid, emailValid }, () => {
+              if (nameValid && ageValid && emailValid) {
+                  alert(`Имя: ${name}\nВозраст: ${age}\nEmail: ${email}`);
+              }
+          });
+      }
+
+      render() {
+          const { nameValid, ageValid, emailValid } = this.state;
+          const nameColor = nameValid ? "green" : "red";
+          const ageColor = ageValid ? "green" : "red";
+          const emailColor = emailValid ? "green" : "red";
+          return (
+              <form onSubmit={this.handleSubmit}>
+                  <p>
+                      <label>Имя:</label><br />
+                      <input type="text" ref={this.nameField} style={{ borderColor: nameColor }} />
+                  </p>
+                  <p>
+                      <label>Возраст:</label><br />
+                      <input type="number" ref={this.ageField} style={{ borderColor: ageColor }} />
+                  </p>
+                  <p>
+                      <label>Email:</label><br />
+                      <input type="email" ref={this.emailField} style={{ borderColor: emailColor }} />
+                  </p>
+                  <input type="submit" value="Отправить" />
+              </form>
+          );
+      }
+    }
+    ReactDOM.createRoot(
+        document.getElementById("app")
+    )
+    .render(
+        <UserForm />
+    );
+    </script>
+</body>
+</html>

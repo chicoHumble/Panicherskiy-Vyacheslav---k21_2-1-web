@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Hello React</title>
+    <style>
+        button {
+            width: 100px;
+            height: 30px;
+            border-radius: 4px;
+            margin: 50px;
+        }
+        .on {
+            color: #666;
+            background-color: #ccc;
+        }
+        .off {
+            color: #888;
+            background-color: white;
+        }
+        .error {
+            color: red;
+            font-size: 14px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div id="app"></div>
+      
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script type="text/babel">
+        class ClickButton extends React.Component {
+            constructor(props) {
+                super(props);
+                this.state = {
+                    class: "off",
+                    label: "Нажми",
+                    count: 0,
+                    input: "",
+                    errorMessage: ""
+                };
+                this.press = this.press.bind(this);
+                this.handleInputChange = this.handleInputChange.bind(this);
+                this.handleSubmit = this.handleSubmit.bind(this);
+            }
+
+            press() {
+                let className = (this.state.class === "off") ? "on" : "off";
+                this.setState((state) => ({
+                    class: className,
+                    count: state.count + 1
+                }));
+            }
+
+            handleInputChange(event) {
+                this.setState({ input: event.target.value });
+            }
+
+            handleSubmit(event) {
+                event.preventDefault();
+                if (this.state.input.trim()) {
+                    this.setState({
+                        label: this.state.input,
+                        input: "",
+                        errorMessage: ""
+                    });
+                } else {
+                    this.setState({ errorMessage: "Пожалуйста, введите допустимое сообщение." });
+                }
+            }
+
+            render() {
+                return (
+                    <div>
+                        <button onClick={this.press} className={this.state.class}>{this.state.label}</button>
+                        <p>Button clicked: {this.state.count} times</p>
+                        <form onSubmit={this.handleSubmit}>
+                            <input 
+                                type="text" 
+                                value={this.state.input} 
+                                onChange={this.handleInputChange} 
+                                placeholder="Новое сообщение"
+                            />
+                            <button type="submit">Обновить</button>
+                        </form>
+                        {this.state.errorMessage && <p className="error">{this.state.errorMessage}</p>}
+                    </div>
+                );
+            }
+        }
+
+        ReactDOM.createRoot(
+            document.getElementById("app")
+        )
+        .render(
+            <ClickButton />
+        );
+    </script>
+</body>
+</html>

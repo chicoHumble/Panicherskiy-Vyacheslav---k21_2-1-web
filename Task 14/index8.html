@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Формы в React</title>
+    <style>
+        form {
+            max-width: 300px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        label {
+            font-weight: bold;
+        }
+        input {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+        }
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+        .invalid {
+            border-color: red;
+        }
+        .valid {
+            border-color: green;
+        }
+    </style>
+</head>
+<body>
+    <div id="app"></div>
+       
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+       
+    <script type="text/babel">
+    class Field extends React.Component {
+        constructor(props) {
+            super(props);
+            var isValid = this.validate(props.value);
+            this.state = { value: props.value, valid: isValid };
+            this.onChange = this.onChange.bind(this);
+        }
+
+        validate(value) {
+            return this.props.validation(value);
+        }
+
+        onChange(e) {
+            var value = e.target.value;
+            var isValid = this.validate(value);
+            this.setState({ value: value, valid: isValid });
+        }
+
+        render() {
+            var className = this.state.valid ? "valid" : "invalid";
+            return (
+                <p>
+                    <label>{this.props.label}:</label><br />
+                    <input type={this.props.type} value={this.state.value} onChange={this.onChange} className={className} />
+                </p>
+            );
+        }
+    }
+
+    class UserForm extends React.Component {
+        constructor(props) {
+            super(props);
+            this.handleSubmit = this.handleSubmit.bind(this);
+            this.nameField = React.createRef();
+            this.ageField = React.createRef();
+            this.emailField = React.createRef();
+            this.phoneField = React.createRef();
+        }
+
+        handleSubmit(e) {
+            e.preventDefault();
+            var name = this.nameField.current.state.value;
+            var age = this.ageField.current.state.value;
+            var email = this.emailField.current.state.value;
+            var phone = this.phoneField.current.state.value;
+            if (this.nameField.current.state.valid && this.ageField.current.state.valid && this.emailField.current.state.valid && this.phoneField.current.state.valid) {
+                alert(`Имя: ${name} Возраст: ${age} Email: ${email} Телефон: ${phone}`);
+            }
+        }
+
+        render() {
+            return (
+                <form onSubmit={this.handleSubmit}>
+                    <Field label="Имя" type="text" value="" validation={(value) => value.length > 2} ref={this.nameField} />
+                    <Field label="Возраст" type="number" value="5" validation={(value) => value >= 0} ref={this.ageField} />
+                    <Field label="Email" type="email" value="" validation={(value) => /\S+@\S+\.\S+/.test(value)} ref={this.emailField} />
+                    <Field label="Телефон" type="tel" value="" validation={(value) => /^\d{10}$/.test(value)} ref={this.phoneField} />
+                    <input type="submit" value="Отправить" />
+                </form>
+            );
+        }
+    }
+
+    ReactDOM.createRoot(
+        document.getElementById("app")
+    )
+    .render(
+        <UserForm />
+    );
+    </script>
+</body>
+</html>

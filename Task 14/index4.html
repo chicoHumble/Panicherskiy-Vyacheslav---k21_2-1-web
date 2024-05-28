@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>METANIT.COM</title>
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous"
+    />
+</head>
+<body>
+    <div id="app" class="container mt-5"></div>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script type="text/babel">
+        const root = ReactDOM.createRoot(
+            document.getElementById("app")
+        );
+
+        class Clock extends React.Component {
+            constructor(props) {
+                super(props);
+                this.state = {
+                    date: new Date(),
+                    name: "Tom",
+                    newName: ""
+                };
+                this.unmount = this.unmount.bind(this);
+                this.handleNameChange = this.handleNameChange.bind(this);
+                this.updateName = this.updateName.bind(this);
+            }
+
+            unmount() {
+                root.unmount();
+            }
+
+            componentDidMount() {
+                this.timerId = setInterval(() => this.tick(), 1000);
+                console.log("componentDidMount()");
+            }
+
+            componentWillUnmount() {
+                clearInterval(this.timerId);
+                console.log("componentWillUnmount()");
+            }
+
+            tick() {
+                this.setState({
+                    date: new Date()
+                });
+            }
+
+            handleNameChange(event) {
+                this.setState({ newName: event.target.value });
+            }
+
+            updateName() {
+                if (this.state.newName.trim() !== "") {
+                    this.setState({ name: this.state.newName });
+                } else {
+                    alert("Name cannot be empty");
+                }
+            }
+
+            render() {
+                return (
+                    <div className="card p-3">
+                        <h1>Привет, {this.state.name}</h1>
+                        <h2>Текущее время: {this.state.date.toLocaleTimeString()}</h2>
+                        <h2>Текущая дата: {this.state.date.toLocaleDateString()}</h2>
+                        <div className="form-group">
+                            <input
+                                type="text"
+                                className="form-control mb-2"
+                                value={this.state.newName}
+                                onChange={this.handleNameChange}
+                                placeholder="Enter new name"
+                            />
+                            <button className="btn btn-primary mr-2" onClick={this.updateName}>Update Name</button>
+                            <button className="btn btn-danger" onClick={this.unmount}>Unmount</button>
+                        </div>
+                    </div>
+                );
+            }
+        }
+
+        root.render(
+            <Clock />
+        );
+    </script>
+</body>
+</html>
